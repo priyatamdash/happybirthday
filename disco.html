@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      :root {
+            --globe-width: 12px;
+            --globe-height: 28px;
+            --globe-spacing: 40px;
+            --globe-spread: 3px;
+            --light-off-opacity: 0.4;
+        }
+
+        body {
+            background: #000;
+        }
+
+        .lightrope {
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            position: absolute;
+            z-index: 1;
+            margin: -15px 0 0 0;
+            padding: 0;
+            pointer-events: none;
+            width: 100%;
+        }
+
+        .lightrope li {
+            position: relative;
+            animation-fill-mode: both;
+            animation-iteration-count: infinite;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+            width: var(--globe-width);
+            height: var(--globe-height);
+            border-radius: 50%;
+            margin: calc(var(--globe-spacing) / 2);
+            background: rgba(0, 247, 165, 1);
+            box-shadow: 0px calc(var(--globe-height) / 6) calc(var(--globe-width) * 2) var(--globe-spread) rgba(0, 247, 165, 1);
+            animation-name: flash-1;
+            animation-duration: 2s;
+        }
+
+        .lightrope li:nth-child(2n+1) {
+            background: rgba(0, 255, 255, 1);
+            box-shadow: 0px calc(var(--globe-height) / 6) calc(var(--globe-width) * 2) var(--globe-spread) rgba(0, 255, 255, 0.5);
+            animation-name: flash-2;
+            animation-duration: 0.4s;
+        }
+
+        .lightrope li:nth-child(4n+2) {
+            background: rgba(247, 0, 148, 1);
+            box-shadow: 0px calc(var(--globe-height) / 6) calc(var(--globe-width) * 2) var(--globe-spread) rgba(247, 0, 148, 1);
+            animation-name: flash-3;
+            animation-duration: 1.1s;
+        }
+
+        .lightrope li:nth-child(odd) {
+            animation-duration: 1.8s;
+        }
+
+        .lightrope li:nth-child(3n+1) {
+            animation-duration: 1.4s;
+        }
+
+        .lightrope li:before {
+            content: "";
+            position: absolute;
+            background: #222;
+            width: calc(var(--globe-width) - 2px);
+            height: calc(var(--globe-height) / 3);
+            border-radius: 3px;
+            top: calc(0px - (var(--globe-height) / 6));
+            left: 1px;
+        }
+
+        .lightrope li:after {
+            content: "";
+            top: calc(0px - var(--globe-height) / 2);
+            left: calc(var(--globe-width) - 3px);
+            position: absolute;
+            width: calc(var(--globe-spacing) + 12px);
+            height: calc((var(--globe-height) / 3) * 2);
+            border-bottom: solid #222 2px;
+            border-radius: 50%;
+        }
+
+        .lightrope li:last-child:after {
+            content: none;
+        }
+
+        .lightrope li:first-child {
+            margin-left: calc(-1 * var(--globe-spacing));
+        }
+
+        @keyframes flash-1 {
+            0%, 100% {
+                background: rgba(0, 247, 165, 1);
+                box-shadow: 0px calc(var(--globe-height) / 6) calc(var(--globe-width) * 2) var(--globe-spread) rgba(0, 247, 165, 1);
+            }
+            50% {
+                background: rgba(0, 247, 165, var(--light-off-opacity));
+                box-shadow: 0px calc(var(--globe-height) / 6) calc(var(--globe-width) * 2) var(--globe-spread) rgba(0, 247, 165, 0.2);
+            }
+        }
+
+        @keyframes flash-2 {
+            0%, 100% {
+                background: rgba(0, 255, 255, 1);
+                box-shadow: 0px calc(var(--globe-height) / 6) calc(var(--globe-width) * 2) var(--globe-spread) rgba(0, 255, 255, 1);
+            }
+            50% {
+                background: rgba(0, 255, 255, var(--light-off-opacity));
+                box-shadow: 0px calc(var(--globe-height) / 6) calc(var(--globe-width) * 2) var(--globe-spread) rgba(0, 255, 255, 0.2);
+            }
+        }
+
+        @keyframes flash-3 {
+            0%, 100% {
+                background: rgba(247, 0, 148, 1);
+                box-shadow: 0px calc(var(--globe-height) / 6) calc(var(--globe-width) * 2) var(--globe-spread) rgba(247, 0, 148, 1);
+            }
+            50% {
+                background: rgba(247, 0, 148, var(--light-off-opacity));
+                box-shadow: 0px calc(var(--globe-height) / 6) calc(var(--globe-width) * 2) var(--globe-spread) rgba(247, 0, 148, 0.2);
+            }
+        }
+
+        @import url('https://fonts.googleapis.com/css?family=Caveat:400,700|Gochi+Hand');
+
+body{
+  background: #000;
+  display: flex;
+  justify-content: center;
+}
+
+h1{
+  font-size: 10vw; /* Responsive font size */
+  font-family: 'Caveat', cursive;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align text */
+}
+
+h1 span{
+  display: inline-block; /* Ensure proper alignment */
+  animation: animate 2.25s linear infinite;
+  margin: 0 0.5vw; /* Adjust margin for responsiveness */
+  padding: 0;
+  color: #111;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 12vw; /* Adjust font size for smaller screens */
+    }
+
+    h1 span {
+        margin: 0 0.3vw; /* Adjust margin for smaller screens */
+    }
+}
+
+h1 span:nth-child(1){
+  animation-delay: 0s;
+}
+h1 span:nth-child(2){
+  animation-delay: .25s;
+}
+h1 span:nth-child(2){
+  animation-delay: .5s;
+}
+h1 span:nth-child(3){
+  animation-delay: .75s;
+}
+h1 span:nth-child(4){
+  animation-delay: 1s;
+}
+h1 span:nth-child(5){
+  animation-delay: 1.25s;
+}
+h1 span:nth-child(6){
+  animation-delay: 1.5s;
+}
+h1 span:nth-child(7){
+  animation-delay: 1.75s;
+}
+
+
+
+
+@keyframes animate {
+  0%, 100%{
+    color: #fff;
+    filter: blur(2px);
+    text-shadow: 0 0 10px #00bbff,
+      0 0 20px #00bbff,
+      0 0 40px #00bbff,
+      0 0 80px #00bbff,
+      0 0 120px #00bbff,
+      0 0 200px #00bbff,
+      0 0 300px #00bbff,
+      0 0 400px #00bbff;
+  }
+  5%, 95%{
+    color: #111;
+    filter: blur(0px);
+    text-shadow: none;
+  }
+}
+
+#animated-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px; /* Shift button to the right */
+    transform: translateX(0); /* Remove centering transform */
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    color: #fff;
+    background: linear-gradient(45deg, #ff007f, #00bbff);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ff007f, 0 0 20px #00bbff;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#animated-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff007f, 0 0 40px #00bbff;
+}
+
+@keyframes button-appear {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+    </style>
+  
+</head>
+<body>
+    <ul class="lightrope">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+
+      <div>
+      <h1 style="display: block; text-align: center;"   >
+        <span>H</span>
+        <span>A</span>
+        <span>P</span>
+        <span>P</span>
+        <span>Y</span>
+        <br>
+        <span>B</span>
+        <span>I</span>
+        <span>R</span>
+        <span>T</span>
+        <span>H</span>
+        <br>
+        <span>D</span>
+        <span>A</span>
+        <span>Y</span>
+        <br>
+        <span>P</span>
+        <span>R</span>
+        <span>I</span>
+        <span>Y</span>
+        <span>A</span>
+        <span>N</span>
+        <span>K</span>
+        <span>A</span>
+      </h1>
+      <button id="animated-button" style="display: none;" onclick="location.href='ballon.html'">Balloon</button>
+      <script>
+          // Show the button after 3 seconds
+          setTimeout(() => {
+              const button = document.getElementById('animated-button');
+              button.style.display = 'block';
+              button.style.animation = 'button-appear 1s ease-in-out';
+          }, 3000);
+      </script>
+    </div>
+</body>
+</html>
